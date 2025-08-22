@@ -7,7 +7,7 @@ const Footer = () => {
         {/* About / Description */}
         <div className="space-y-4">
           <h2 className="text-white font-semibold text-lg flex items-center space-x-2">
-            <span className="w-6 h-6 bg-blue-800 rounded-full flex items-center justify-center">🌐</span>
+            <span className="w-6 h-6 bg-blue-800 rounded-full flex items-center justify-center">🌐</span> <span></span>
             Climate Action Hub
           </h2>
           <p className="text-gray-400 text-sm">

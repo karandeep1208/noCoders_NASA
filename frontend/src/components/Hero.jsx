@@ -1,0 +1,32 @@
+import { Play, Download } from "lucide-react";
+
+const Hero = () => {
+  return (
+    <section className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      <div className="absolute inset-0 bg-slate-800/20 opacity-50"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+            Monitoring Earth's Future
+          </h2>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+            Leverage space agency APIs to track human development impact on environment through 
+            SDGs 13, 14, and 15. Real-time satellite data for climate action and sustainability.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg transition-all transform hover:scale-105 flex items-center space-x-2">
+              <Play className="w-5 h-5" />
+              <span>Start Monitoring</span>
+            </button>
+            <button className="border border-slate-600 hover:border-slate-500 px-8 py-3 rounded-lg transition-all hover:bg-slate-800 flex items-center space-x-2">
+              <Download className="w-5 h-5" />
+              <span>Download Data</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

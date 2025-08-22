@@ -18,12 +18,13 @@ const Hero = () => {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
-        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+        <h2 className="text-6xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent leading-normal">
           Monitoring Earth's Future
         </h2>
         <p className="text-xl text-slate-200 max-w-3xl mb-8 text-center">
-          Leverage space agency APIs to track human development impact on environment through 
-          SDGs 13, 14, and 15. Real-time satellite data for climate action and sustainability.
+          Leveraging 50+ years of NASA climate data and AI/ML to predict climate risks
+          and opportunities, providing actionable foresight for governments, businesses,
+          and farmers.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg transition-all transform hover:scale-105 flex items-center space-x-2">

@@ -1,80 +1,85 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Satellite, Globe } from "lucide-react";
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleLaunch = () => navigate("/dashboard");
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-gradient-to-r from-nasaBlue/90 via-indigo-900/80 to-purple-900/80 backdrop-blur-md border-b border-indigo-700"
-          : "bg-transparent"
-      }`}
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 70, damping: 16 }}
+      className="
+        fixed top-0 left-0 w-full z-50
+        bg-black/50 backdrop-blur-lg
+        border-b border-emerald-500/20
+        shadow-[0_6px_32px_0_rgba(16,185,129,0.09)]
+        transition-all
+      "
     >
       <div className="container mx-auto px-6 py-3 flex items-center justify-between flex-wrap md:flex-nowrap">
         {/* Logo + Title */}
         <Link to="/" className="flex items-center space-x-2 group flex-shrink-0">
-          <div className="p-2 rounded-lg bg-nasaBlue group-hover:bg-primary/50 transition-colors shadow-md">
-            <Satellite className="w-5 h-5 text-primary" />
-          </div>
-          <span className="text-lg font-bold font-orbitron text-white group-hover:text-primary transition-colors whitespace-nowrap">
+          <span className="text-lg font-bold font-orbitron text-blue-600 group-hover:text-blue-300 transition-colors whitespace-nowrap tracking-wider shadow-sm">
             Climate Action Hub
           </span>
         </Link>
 
         {/* Navigation Links */}
-        <div className="flex items-center space-x-6 flex-grow justify-center">
-          <Link
-            to="/"
-            className={`text-sm font-medium transition-colors ${
-              location.pathname === "/"
-                ? "text-primary font-semibold"
-                : "text-white hover:text-primary/80"
-            } whitespace-nowrap`}
-          >
-            Mission Home
-          </Link>
-          <Link
-            to="/dashboard"
-            className={`text-sm font-medium transition-colors ${
-              location.pathname === "/dashboard"
-                ? "text-primary font-semibold"
-                : "text-white hover:text-primary/80"
-            } whitespace-nowrap`}
-          >
-            Control Center
-          </Link>
+        <div className="flex items-center space-x-8 flex-grow justify-center">
+          <NavLinkItem label="Mission Home" to="/" active={location.pathname === "/"} />
+          <NavLinkItem label="Control Center" to="/dashboard" active={location.pathname === "/dashboard"} />
         </div>
 
         {/* CTA Button */}
-        <div className="flex-shrink-0">
-          <button
-            onClick={handleLaunch}
-            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary to-nasaBlue hover:from-rocketRed hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 whitespace-nowrap"
-          >
-            <Globe className="w-4 h-4" />
-            <span>Launch Dashboard</span>
-          </button>
-        </div>
+        <button
+          onClick={handleLaunch}
+          className="flex items-center space-x-2 px-4 py-2 
+            bg-gradient-to-r from-blue-500 via-blue-400 to-blue-700
+            hover:from-blue-700  hover:via-blue-400 hover:to-blue-500
+            text-white font-semibold rounded-xl shadow-xl
+            transition-all duration-300 whitespace-nowrap
+            backdrop-blur-sm"
+        >
+          <Globe className="w-4 h-4" />
+          <span>Launch Dashboard</span>
+        </button>
       </div>
     </motion.nav>
   );
 };
+
+function NavLinkItem({ label, to, active }) {
+  return (
+    <Link
+      to={to}
+      className={`
+        relative px-2 py-1 text-sm font-medium transition-all
+        duration-200 cursor-pointer
+        ${active
+          ? "text-blue-500 font-semibold"
+          : "text-white hover:text-blue-300"
+        }
+      `}
+    >
+      <span>{label}</span>
+      {/* Animated underline */}
+      <span
+        className={`absolute left-0 -bottom-1 h-0.5 rounded-full transition-all duration-300
+          ${active
+            ? "w-full bg-blue-400/80 shadow-[0_2px_8px_0_rgba(16,185,129,0.35)]"
+            : "w-0 bg-emerald-400/40"
+          }
+          group-hover:w-full
+        `}
+      />
+    </Link>
+  );
+}
 
 export default Navbar;

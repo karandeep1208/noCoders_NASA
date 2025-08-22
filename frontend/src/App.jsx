@@ -10,11 +10,9 @@ const App = () => {
       <Navbar />
 
       {/* Main content */}
-      <div className="pt-24 bg-space min-h-screen text-white">
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
-      </div>
     </Router>
   );
 };

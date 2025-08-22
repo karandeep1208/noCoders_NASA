@@ -1,7 +1,7 @@
 const SDGMetrics = ({ sdgData, activeSDG }) => {
   return (
-    <div className="space-y-6">
-      <div className={`${sdgData[activeSDG].color} rounded-xl p-6 text-white`}>
+    <div className="space-y-6 w-full">
+      <div className={`${sdgData[activeSDG].color} rounded-xl p-6 text-white bg-gradient-to-r from-blue-500 to-green-500 w-full`}>
         <h5 className="text-lg font-semibold mb-2">SDG {activeSDG}</h5>
         <h6 className="text-2xl font-bold mb-2">{sdgData[activeSDG].title}</h6>
         <p className="text-white/80 text-sm">{sdgData[activeSDG].description}</p>

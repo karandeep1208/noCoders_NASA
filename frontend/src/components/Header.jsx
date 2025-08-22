@@ -1,16 +1,15 @@
-import { Globe, BarChart3, MapPin, Satellite } from "lucide-react";
+import { Globe, BarChart3, MapPin } from "lucide-react";
+import Logo from "../assets/logoFinal.png";
 
 const Header = () => {
   return (
     <header className="border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className=" mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
-              <Satellite className="w-6 h-6 text-white" />
-            </div>
+            <img src={Logo} alt="TerraForecast Logo" className="w-12 h-12" />
             <div>
-              <h1 className="text-xl font-bold">EarthWatch SDG</h1>
+              <h1 className="text-xl font-bold">TerraForecast</h1>
               <p className="text-xs text-slate-400">Space-Based Environmental Monitoring</p>
             </div>
           </div>

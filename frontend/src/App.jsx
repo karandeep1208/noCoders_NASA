@@ -4,7 +4,7 @@ import Hero from "./components/Hero";
 import QuickStats from "./components/QuickStats";
 import SDGDashboard from "./components/SDG/SDGDashboard";
 import DataSources from "./components/DataSources";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [activeSDG, setActiveSDG] = useState("13");
@@ -22,7 +22,7 @@ const App = () => {
         setSelectedRegion={setSelectedRegion}
       />
       <DataSources />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

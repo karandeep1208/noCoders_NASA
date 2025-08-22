@@ -52,8 +52,8 @@ const SDGDashboard = ({ activeSDG, setActiveSDG, selectedRegion, setSelectedRegi
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Visualization */}
-          <div className="lg:col-span-2">
-            <div className="bg-slate-800 rounded-xl p-6 h-96 relative overflow-hidden">
+          <div className="col-span-full">
+            <div className="bg-slate-800 rounded-xl p-6 w-full h-[600px] relative overflow-hidden">
               <div className="flex items-center justify-between mb-4">
                 <h4 className="text-xl font-semibold">Global {sdgData[activeSDG].title} Overview</h4>
                 <div className="flex items-center space-x-2">
@@ -81,7 +81,7 @@ const SDGDashboard = ({ activeSDG, setActiveSDG, selectedRegion, setSelectedRegi
               </div>
               <div className="absolute inset-6 bg-gradient-to-br from-slate-700 to-slate-600 rounded-lg flex items-center justify-center">
                 <div className="text-center">
-                  <Globe className="w-16 h-16 text-slate-400 mx-auto mb-4 animate-pulse" />
+                  <Globe className="w-32 h-32 text-slate-400 mx-auto mb-4 animate-pulse" />
                   <p className="text-slate-400">Interactive Earth Visualization</p>
                   <p className="text-sm text-slate-500 mt-2">
                     Powered by NASA Earthdata, ISRO Bhuvan & ESA Copernicus APIs
@@ -92,10 +92,20 @@ const SDGDashboard = ({ activeSDG, setActiveSDG, selectedRegion, setSelectedRegi
           </div>
 
           {/* Metrics */}
-          <div className="space-y-6">
-            <SDGMetrics sdgData={sdgData} activeSDG={activeSDG} />
-            <RecentUpdates />
+          <div className="grid grid-cols-1 pl-32 lg:grid-cols-2 gap-6 w-[1100px]">
+            {/* Left Side - Metrics */}
+            <div className="pt-10 w-full">
+              <div className="space-y-6">
+                <SDGMetrics sdgData={sdgData} activeSDG={activeSDG} />
+              </div>
+            </div>
+
+            {/* Right Side - Recent Updates */}
+            <div className="w-full h-[600px]">
+              <RecentUpdates />
+            </div>
           </div>
+
         </div>
       </div>
     </section>

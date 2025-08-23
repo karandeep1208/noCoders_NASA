@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { body, query } = require('express-validator');
 const nasaController = require('../controllers/nasaDataController');
+const predictionController = require('../controllers/predictionController');
 
 // Validation rules
 const climateDataValidation = [
@@ -20,10 +21,15 @@ const gibsValidation = [
   body('date').optional().isISO8601().withMessage('Valid date required if provided')
 ];
 
-// Routes
 router.get('/health', (req, res) => {
   res.json({ status: 'NASA API routes are working' });
 });
+
+// Test endpoint for POWER API
+router.get('/power/test', predictionController.testPowerAPI);
+
+// Get available parameters
+router.get('/power/parameters', predictionController.getAvailableParameters);
 
 // Climate data routes
 router.post('/climate-data', climateDataValidation, nasaController.getClimateData);

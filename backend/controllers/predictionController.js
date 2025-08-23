@@ -9,7 +9,6 @@ const {
   validateDateRange,
   calculateRiskScore
 } = require('../utils/helpers');
-
 // Generate climate predictions based on historical data
 exports.generatePredictions = async (req, res) => {
   try {
@@ -28,6 +27,8 @@ exports.generatePredictions = async (req, res) => {
     if (futureYears < 1 || futureYears > 50) {
       return res.status(400).json({ error: 'Future years must be between 1 and 50' });
     }
+
+    console.log('Fetching climate data for:', { lat, lon, startDate, endDate });
 
     // Fetch historical data from NASA POWER API
     const nasaData = await nasaApiService.getClimateData(
@@ -66,11 +67,65 @@ exports.generatePredictions = async (req, res) => {
     console.error('Error generating predictions:', error);
     res.status(500).json({ 
       error: 'Failed to generate predictions',
-      message: error.message 
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 };
 
+// Test endpoint to verify POWER API connection
+exports.testPowerAPI = async (req, res) => {
+  try {
+    // Simple test request with known good parameters
+    const testData = await nasaApiService.getTemperatureData(
+      40.7128, // New York
+      -74.0060,
+      '2020-01-01',
+      '2020-01-31'
+    );
+
+    res.json({
+      success: true,
+      message: 'POWER API connection successful',
+      data: {
+        parameters: ['T2M'],
+        period: { start: '2020-01-01', end: '2020-01-31' },
+        location: { lat: 40.7128, lon: -74.0060 },
+        recordCount: testData.properties.parameter.T2M ? Object.keys(testData.properties.parameter.T2M).length : 0
+      }
+    });
+  } catch (error) {
+    console.error('POWER API test failed:', error);
+    res.status(500).json({ 
+      success: false,
+      error: 'POWER API test failed',
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+};
+
+// Get available parameters from POWER API
+exports.getAvailableParameters = async (req, res) => {
+  try {
+    const parameters = await nasaApiService.getAvailableParameters();
+    
+    res.json({
+      success: true,
+      data: parameters,
+      metadata: {
+        source: 'NASA POWER API',
+        totalParameters: parameters.length
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching available parameters:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch available parameters',
+      message: error.message
+    });
+  }
+};
 // Get agricultural recommendations based on climate predictions
 exports.getAgriculturalRecommendations = async (req, res) => {
   try {

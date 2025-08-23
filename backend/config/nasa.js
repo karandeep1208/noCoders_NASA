@@ -31,15 +31,15 @@ module.exports = {
   },
 
   // POWER (Prediction Of Worldwide Energy Resources)
-  POWER: {
-    baseURL: 'https://power.larc.nasa.gov/api',
-    temporalEndpoint: '/temporal/daily/point',
-    climatologyEndpoint: '/climatology/daily/point'
+   POWER: {
+    baseURL: 'https://power.larc.nasa.gov',
+    temporalEndpoint: '/api/temporal/daily/point',
+    climatologyEndpoint: '/api/climatology/daily/point'
   },
 
   // Common parameters
   defaultParams: {
     format: 'JSON',
-    community: 'RE'
+    community: 'RE' // Try 'SB' if 'RE' doesn't work
   }
 };

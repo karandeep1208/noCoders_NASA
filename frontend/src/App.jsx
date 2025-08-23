@@ -1,30 +1,20 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import QuickStats from "./components/QuickStats";
-import SDGDashboard from "./components/SDG/SDGDashboard";
-import DataSources from "./components/DataSources";
-// import Footer from "./components/Footer";
+import React from 'react';
+import Header from './components1/Header';
+import Hero from './components1/Hero';
+import Dashboard from './components1/Dashboard';
+import DataSources from './components1/DataSources';
+import Footer from './components1/Footer';
 
-const App = () => {
-  const [activeSDG, setActiveSDG] = useState("13");
-  const [selectedRegion, setSelectedRegion] = useState("global");
-
+function App() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="App">
       <Header />
       <Hero />
-      <QuickStats />
-      <SDGDashboard
-        activeSDG={activeSDG}
-        setActiveSDG={setActiveSDG}
-        selectedRegion={selectedRegion}
-        setSelectedRegion={setSelectedRegion}
-      />
+      <Dashboard />
       <DataSources />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
-};
+}
 
 export default App;

@@ -1,4 +1,6 @@
 import { Globe, RefreshCw, Layers, Settings } from "lucide-react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import SDGSelector from "./SDGSelector";
 import SDGMetrics from "./SDGMetrics";
 import RecentUpdates from "./RecentUpdates";
@@ -80,14 +82,33 @@ const SDGDashboard = ({ activeSDG, setActiveSDG, selectedRegion, setSelectedRegi
                 </div>
               </div>
               <div className="absolute inset-6 bg-gradient-to-br from-slate-700 to-slate-600 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Globe className="w-32 h-32 text-slate-400 mx-auto mb-4 animate-pulse" />
-                  <p className="text-slate-400">Interactive Earth Visualization</p>
-                  <p className="text-sm text-slate-500 mt-2">
-                    Powered by NASA Earthdata, ISRO Bhuvan & ESA Copernicus APIs
-                  </p>
-                </div>
+                <MapContainer
+                  center={[12.972, 77.595]}  // initial map center
+                  zoom={6}
+                  style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }} // full size of parent div
+                >
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&copy; OpenStreetMap contributors"
+                  />
+                  {/* Example markers */}
+                  <Marker position={[12.972, 77.595]}>
+                    <Popup>
+                      City A<br />
+                      Temperature: 30°C<br />
+                      Rainfall: 5mm
+                    </Popup>
+                  </Marker>
+                  <Marker position={[13.082, 77.567]}>
+                    <Popup>
+                      City B<br />
+                      Temperature: 28°C<br />
+                      Rainfall: 10mm
+                    </Popup>
+                  </Marker>
+                </MapContainer>
               </div>
+
             </div>
           </div>
 
